@@ -1,8 +1,8 @@
-<p align="center">
-  <img src="docs/images/icon.png" width="96" height="96" alt="KoriyoSCAN 아이콘">
-</p>
+# 감독관 레이더 (Proctor Radar)
 
-# KoriyoSCAN
+> **원본과의 관계:** 이 앱은 [KoriyoSCAN](https://github.com/reform-dev-team/exam-rf-guard) 1.0.1(Apache-2.0)을 바탕으로 고친 별도 앱입니다. KoriyoSCAN 원작자나 화성시가 만들거나 보증한 앱이 아니며, 원본 NOTICE 조건에 따라 이름과 아이콘을 바꿨습니다. 원본 대비 바뀐 점은 [CHANGELOG](CHANGELOG.md)의 "작업본" 항목에 있습니다.
+>
+> **원본 대비 추가된 것(모두 현장 검증 전):** ① 광학 키트(별도 장치)의 판정을 블루투스 광고로 받아 "광학 키트" 칸에 표시, ② 스마트 안경 회사의 블루투스 회사 코드·서비스 번호에 "스마트 안경 회사 기기 후보" 표시, ③ 원본 1.0.1의 테스트 결함 수정.
 
 시험 감독관용 Android 앱입니다. 수험생이 들어오기 전 빈 교실의 와이파이·블루투스 전파를 기록해 두고, 시험 중에 그 기록에 없던 전파가 잡히면 화면으로 알립니다.
 
@@ -27,7 +27,7 @@
 
 - **현장 검증 전입니다.** 자동 테스트는 통과하지만 실제 시험장에서 얼마나 잡고 얼마나 놓치는지는 측정하지 않았습니다.
 - 시험 주관 기관의 지침이 감독관의 휴대폰 반입이나 사용을 제한할 수 있습니다. 쓰기 전에 해당 시험의 지침을 확인해야 합니다.
-- 실기기에서 써 본 결과는 [Issues](https://github.com/reform-dev-team/exam-rf-guard/issues)로 알려 주세요. 적는 방법은 [제보](#제보)에 있습니다.
+- 실기기에서 써 본 결과는 [Issues](https://github.com/maropol0611-jpg/exam-glasses-guard/issues)로 알려 주세요. 적는 방법은 [제보](#제보)에 있습니다.
 
 ## 사용 순서
 
@@ -159,7 +159,7 @@ APK는 `app/build/outputs/apk/debug/app-debug.apk`에 생깁니다. 구조와 �
 - [이름 기반 제품 후보의 제품명 출처](docs/DEVICE-NAME-SOURCES.md)
 - [Android BLE 기기 탐색](https://developer.android.com/develop/connectivity/bluetooth/ble/find-ble-devices), [Android Wi-Fi 탐색과 제한](https://developer.android.com/develop/connectivity/wifi/wifi-scan)
 
-앱 아이콘의 캐릭터는 화성시 캐릭터 코리요입니다. 원저작자는 화성시이며 [공공누리 제1유형](https://www.kogl.or.kr/info/licenseType1.do)(출처표시) 조건으로 이용합니다. 아이콘의 3D 그림은 [KoriyoZIP](https://koriyozip.com/ko/)의 3D 스타일 재구성 이미지를 가공한 것으로 화성시의 공식 3D 원본이 아니며, 화성시나 KoriyoZIP이 이 앱을 제작·보증했다는 의미도 아닙니다.
+이 앱의 아이콘(안경과 전파 호)은 새로 그린 것입니다. 원본 KoriyoSCAN의 코리요 아이콘은 쓰지 않습니다.
 
 제품명과 회사명은 관측 결과를 설명하기 위해 사용합니다. 해당 제조사가 이 앱을 인증하거나 보증했다는 의미는 아닙니다.
 
@@ -167,11 +167,11 @@ APK는 `app/build/outputs/apk/debug/app-debug.apk`에 생깁니다. 구조와 �
 
 소스 코드는 [Apache License 2.0](LICENSE)으로 공개합니다. 누구나 사용·수정·재배포할 수 있으며, 저작권 표시와 라이선스 문구를 유지하고 고친 파일에는 고쳤다는 표시를 남겨야 합니다.
 
-이 라이선스는 코드에만 적용됩니다. 앱 아이콘(코리요), 앱에 포함한 등록부, "KoriyoSCAN"이라는 이름에는 각 권리자의 조건이 적용됩니다. 자세한 내용은 [NOTICE](NOTICE)에 있습니다.
+이 라이선스는 코드에만 적용됩니다. 앱에 포함한 등록부에는 각 권리자의 조건이 적용됩니다. 원본 KoriyoSCAN의 저작권 표시와 NOTICE를 그대로 유지합니다. 자세한 내용은 [NOTICE](NOTICE)에 있습니다.
 
 ## English
 
-KoriyoSCAN is an Android app for exam proctors. It records the Wi-Fi access points and Bluetooth Low Energy advertisements present in an empty room, then flags signals that were not in that record once the exam is under way, and helps walk toward one by signal strength.
+Proctor Radar is a modified version of KoriyoSCAN 1.0.1 (Apache-2.0), renamed per the original NOTICE and not endorsed by its authors. It is an Android app for exam proctors. It records the Wi-Fi access points and Bluetooth Low Energy advertisements present in an empty room, then flags signals that were not in that record once the exam is under way, and helps walk toward one by signal strength.
 
 It cannot detect every device. It only sees Wi-Fi access points and BLE advertisements, so it misses devices that use cellular data only, wired or record-only cameras, Bluetooth Classic devices, and anything that stops advertising once connected. It does not block signals and does not decide whether anyone cheated. Field accuracy has not been measured.
 

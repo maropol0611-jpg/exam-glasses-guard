@@ -9,7 +9,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.classroom.rfdetector"
+        applicationId = "io.github.maropol0611.proctorradar"
         minSdk = 29
         targetSdk = 35
         versionCode = 14

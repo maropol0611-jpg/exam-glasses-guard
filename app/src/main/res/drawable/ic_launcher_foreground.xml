@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 감독관 레이더 아이콘: 안경과 그 위의 전파 호. 원본 KoriyoSCAN 의 코리요 아이콘을 대체한다. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- 전파 호 3개 -->
+    <path android:pathData="M42,42 A16,16 0 0,1 66,42" android:strokeColor="#62E0CB" android:strokeWidth="3.5" android:strokeLineCap="round" android:fillColor="#00000000"/>
+    <path android:pathData="M36,36 A24,24 0 0,1 72,36" android:strokeColor="#62E0CB" android:strokeWidth="3.5" android:strokeLineCap="round" android:fillColor="#00000000"/>
+    <path android:pathData="M30,30 A32,32 0 0,1 78,30" android:strokeColor="#62E0CB" android:strokeWidth="3.5" android:strokeLineCap="round" android:fillColor="#00000000"/>
+    <!-- 안경 -->
+    <path android:pathData="M40,63 m-10,0 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0" android:strokeColor="#E8EEF5" android:strokeWidth="4" android:fillColor="#00000000"/>
+    <path android:pathData="M68,63 m-10,0 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0" android:strokeColor="#E8EEF5" android:strokeWidth="4" android:fillColor="#00000000"/>
+    <path android:pathData="M50,62 Q54,57 58,62" android:strokeColor="#E8EEF5" android:strokeWidth="4" android:strokeLineCap="round" android:fillColor="#00000000"/>
+    <path android:pathData="M30,61 L24,57" android:strokeColor="#E8EEF5" android:strokeWidth="4" android:strokeLineCap="round"/>
+    <path android:pathData="M78,61 L84,57" android:strokeColor="#E8EEF5" android:strokeWidth="4" android:strokeLineCap="round"/>
+</vector>

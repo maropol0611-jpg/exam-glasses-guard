@@ -90,7 +90,7 @@ fun App() {
             Row(Modifier.fillMaxWidth().padding(start = 20.dp, end = 8.dp, top = 8.dp, bottom = 4.dp), verticalAlignment = Alignment.CenterVertically) {
                 val sub = guide || findKey != null
                 if (sub) TextButton(onClick = { if (findKey != null) closeFind() else guide = false }, modifier = Modifier.semantics { contentDescription = "돌아가기" }) { Text("‹", style = MaterialTheme.typography.headlineLarge) }
-                Text(if (findKey != null) "위치 찾기" else if (guide) "안내" else "KoriyoSCAN", Modifier.weight(1f), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                Text(if (findKey != null) "위치 찾기" else if (guide) "안내" else "감독관 레이더", Modifier.weight(1f), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                 if (!sub) TextButton(onClick = { guide = true }) { Text("안내") }
             }
             Box(Modifier.weight(1f)) {

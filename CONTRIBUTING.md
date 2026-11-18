@@ -1,10 +1,10 @@
 # 기여 안내
 
-KoriyoSCAN에 관심을 가져 주셔서 감사합니다. 코드 수정뿐 아니라 실기기에서 써 본 결과를 알려 주는 것도 큰 도움이 됩니다.
+감독관 레이더(KoriyoSCAN 1.0.1 기반 수정본)에 관심을 가져 주셔서 감사합니다. 코드 수정뿐 아니라 실기기에서 써 본 결과를 알려 주는 것도 큰 도움이 됩니다.
 
 ## 제보
 
-실기기 관측 결과와 버그는 [Issues](https://github.com/reform-dev-team/exam-rf-guard/issues)에 올려 주세요. 적을 내용은 [README의 제보](README.md#제보)에 있습니다. 화면이나 기록을 첨부할 때는 이름·주소·장소를 가려 주세요.
+실기기 관측 결과와 버그는 [Issues](https://github.com/maropol0611-jpg/exam-glasses-guard/issues)에 올려 주세요. 적을 내용은 [README의 제보](README.md#제보)에 있습니다. 화면이나 기록을 첨부할 때는 이름·주소·장소를 가려 주세요.
 
 ## 코드 기여
 
