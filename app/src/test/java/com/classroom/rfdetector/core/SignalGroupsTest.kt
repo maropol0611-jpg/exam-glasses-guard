@@ -221,4 +221,39 @@ class SignalGroupsTest {
         assertEquals("BLE:name:far watch", result.far.single().key)
         assertEquals(0, result.count)
     }
+
+    @Test fun weakNewWifiIsHeldBackUntilItKeepsShowingButANearOneIsFlaggedAtOnce() {
+        wifi("10:00:00:00:00:01", 0, "SCHOOL")
+        val baseline = baselineAt(1_000)
+        val routers = routersAt(1_000)
+        // 이웃 공유기: "중간" 세기(-80 dBm)로 한 번 잡혔다. 알리지 않고 약하게·잠깐 잡힌 것에 둔다.
+        wifi("3c:11:22:33:44:01", 100_000, "KT_GiGA_neighbor", rssi = -80)
+        val first = view(baseline, 101_000, routers = routers)
+        assertEquals(0, first.count)
+        assertEquals(listOf("WIFI:name:kt_giga_neighbor"), first.far.map { it.key })
+        // 30초 간격 탐색마다 2분 넘게 계속 잡히면 알린다.
+        (1..4).forEach { wifi("3c:11:22:33:44:01", 100_000L + it * 30_000L, "KT_GiGA_neighbor", rssi = -80) }
+        val kept = view(baseline, 221_000, routers = routers)
+        assertEquals(1, kept.count)
+        assertTrue(kept.wifi.single().alert)
+        // 가까운(-60 dBm) 새 핫스팟은 한 번만 잡혀도 바로 알린다. 숨긴 이름이어도 같다.
+        wifi("6a:3f:9c:11:22:33", 222_000, null, rssi = -60)
+        val hotspot = view(baseline, 223_000, routers = routers)
+        assertEquals(2, hotspot.count)
+        assertTrue(hotspot.wifi.any { it.key == "WIFI:hidden" })
+    }
+
+    @Test fun weakWifiThatComesAndGoesNeverReachesTheAlertList() {
+        wifi("10:00:00:00:00:01", 0, "SCHOOL")
+        val baseline = baselineAt(1_000)
+        val routers = routersAt(1_000)
+        // 잡혔다가 2분 넘게 사라지고 다시 잡히면 새 구간이라 이어진 시간으로 치지 않는다.
+        wifi("3c:11:22:33:44:02", 100_000, "U+Net_neighbor", rssi = -82)
+        wifi("3c:11:22:33:44:02", 130_000, "U+Net_neighbor", rssi = -82)
+        wifi("3c:11:22:33:44:02", 300_000, "U+Net_neighbor", rssi = -82)
+        wifi("3c:11:22:33:44:02", 330_000, "U+Net_neighbor", rssi = -82)
+        val view = view(baseline, 331_000, routers = routers)
+        assertEquals(0, view.count)
+        assertEquals(1, view.far.size)
+    }
 }

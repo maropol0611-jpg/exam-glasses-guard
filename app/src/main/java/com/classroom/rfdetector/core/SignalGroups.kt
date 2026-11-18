@@ -6,6 +6,15 @@ import java.util.Locale
 const val ESTABLISHED_MS = 30_000L
 
 /**
+ * 새 와이파이를 바로 알리는 세기. 이보다 약한(거리 어림 3m 넘게, "중간"·"멀다") 새 와이파이는
+ * WIFI_PERSIST_MS 넘게 계속 잡혀야 알린다. 현장 측정(2026-11-18)에서 오경보는 모두 이웃 공유기가
+ * "중간"·"멀다" 세기로 잠깐씩 잡혔다 사라진 것이었다. 같은 교실의 핫스팟은 대개 이보다 세게 잡혀 바로 알린다.
+ */
+const val WIFI_NEAR_DBM = -72.0
+/** 약한 새 와이파이가 이만큼 이어서 잡혀야 알린다. 와이파이 탐색이 30초 간격이라 약 4회 연속에 해당한다. */
+const val WIFI_PERSIST_MS = 120_000L
+
+/**
  * 주소 대신 쓰는 묶음 기준. 블루투스 주소는 10~15분마다 바뀌므로 기기가 알린 이름,
  * 이름이 없으면 회사 코드와 종류 단서로 묶는다. 와이파이는 이름으로 묶는다.
  */
@@ -108,6 +117,8 @@ fun watchView(devices: List<TrackedDevice>, baseline: Map<String, Int>, acknowle
     val knownWifi = baselineWifi + acknowledged.wifi
     val rest = others.filterNot { it.source == ScanSource.WIFI && isSameAccessPoint(it.key, knownWifi) }
     val flagged = mutableListOf<SignalGroup>()
+    // 약하고 잠깐만 잡힌 새 와이파이. 알리지 않고 "멀리서 약하게·잠깐 잡힌 것"에 모은다.
+    val brief = mutableListOf<SignalGroup>()
     rest.groupBy { it.groupKey }.forEach { (key, members) ->
         // 확인함으로 표시한 주소는 뒤로 보내, 대표(맨 앞)가 아직 확인하지 않은 것이 되게 한다.
         val sorted = members.sortedWith(compareBy<TrackedDevice> { it.trackingKey in acknowledged.keys }
@@ -119,7 +130,13 @@ fun watchView(devices: List<TrackedDevice>, baseline: Map<String, Int>, acknowle
         val group = when {
             // 여기까지 남은 와이파이는 빈 교실의 어느 공유기와도 주소가 이어지지 않는 새 주소다.
             // 이름이 같거나(흉내 낸 이름) 이름을 숨겼어도(숨긴 핫스팟) 알린다. 와이파이 주소는 바뀌지 않으므로 바로 알린다.
-            wifi -> SignalGroup(key, sorted, 0, alert = true)
+            // 다만 약하게 잡히는 것은 이웃 공유기가 잠깐 잡혔다 사라지는 경우가 많아, 계속 잡힐 때만 알린다.
+            wifi -> {
+                val near = (sorted.first().rssiEma ?: Double.NEGATIVE_INFINITY) >= WIFI_NEAR_DBM
+                val persistent = members.any { it.lastSeenMs - (it.periods.lastOrNull()?.firstSeenMs ?: it.firstSeenMs) >= WIFI_PERSIST_MS }
+                if (near || persistent) SignalGroup(key, sorted, 0, alert = true)
+                else { brief += SignalGroup(key, sorted, 0, alert = false); null }
+            }
             // 빈 교실에 없던 묶음은 바로 보이고, 30초 넘게 이어지면 알린다.
             allowed == 0 -> SignalGroup(key, sorted, 0, alert = established > 0)
             established > allowed -> SignalGroup(key, sorted, before, alert = true)
@@ -132,7 +149,7 @@ fun watchView(devices: List<TrackedDevice>, baseline: Map<String, Int>, acknowle
     return WatchView(
         wifi = near.filter { it.strongest.source == ScanSource.WIFI },
         bluetooth = near.filter { it.strongest.source != ScanSource.WIFI },
-        far = far,
+        far = far + brief.sortedWith(byStrength),
         findMy = findMy,
         knownGroups = knownGroups(devices, baseline, acknowledged, knownWifi, samples),
     )

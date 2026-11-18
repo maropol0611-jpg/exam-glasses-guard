@@ -189,7 +189,7 @@ fun GuardScreen(vm: AppViewModel, permissionMissing: Boolean, onStart: () -> Uni
                         item { GuardSectionTitle(RfSymbol.BLUETOOTH, "블루투스", if (watch.bluetooth.isEmpty()) "빈 교실 때보다 늘어난 기기 없음" else "빈 교실 때보다 늘어난 기기 ${watch.bluetooth.size}종") }
                         watch.bluetooth.forEach { group -> groupRows(group, openGroup == group.key, { toggle(group.key) }, onFind) }
                         kitItems(kit, vm::setKitCode, vm::dismissKitEvent)
-                        if (watch.far.isNotEmpty()) item { FoldRow("멀리서 약하게 잡히는 것 ${watch.far.size}종", farOpen) { farOpen = !farOpen } }
+                        if (watch.far.isNotEmpty()) item { FoldRow("멀리서 약하게·잠깐 잡힌 것 ${watch.far.size}종", farOpen) { farOpen = !farOpen } }
                         if (farOpen) watch.far.forEach { group -> groupRows(group, openGroup == group.key, { toggle(group.key) }, onFind) }
                         if (watch.findMy.isNotEmpty()) item { FoldRow("꺼 둔 아이폰·에어태그 신호 ${watch.findMy.size}개", findMyOpen) { findMyOpen = !findMyOpen } }
                         if (findMyOpen) {
