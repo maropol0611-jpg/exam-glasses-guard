@@ -1,0 +1,20 @@
+KoriyoSCAN identity registry data
+Retrieved 2026-11-16 (Asia/Seoul).
+
+mac-vendors.tsv: 24-bit MA-L assignments from IEEE Registration Authority.
+Source: https://standards-oui.ieee.org/oui/oui.csv
+Columns retained: Assignment and Organization Name. Addresses omitted.
+Only globally administered unicast addresses are queried. BLE matches are
+registration candidates: a random BLE address can coincide with a registered OUI.
+No MA-M/MA-S lookup or model inference from an OUI is performed.
+
+bluetooth-companies.tsv: Bluetooth SIG Company Identifiers.
+Source: https://bitbucket.org/bluetooth-SIG/public/raw/main/assigned_numbers/company_identifiers/company_identifiers.yaml
+Official index: https://www.bluetooth.com/specifications/assigned-numbers/
+Columns retained: decimal company identifier and company name.
+Identifiers indicate the company responsible for manufacturer-specific advertising
+data; they do not certify the physical device brand or model.
+
+The files contain factual registry entries and retain official organization
+names. The files ship with the app; scans and address lookups do not contact a
+remote lookup service. Refresh from official sources for newer registrations.
