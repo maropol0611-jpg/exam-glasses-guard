@@ -1,6 +1,6 @@
 # 감독관 레이더 (Proctor Radar)
 
-> **원본과의 관계:** 이 앱은 [KoriyoSCAN](https://github.com/reform-dev-team/exam-rf-guard) 1.0.1(Apache-2.0)을 바탕으로 고친 별도 앱입니다. KoriyoSCAN 원작자나 화성시가 만들거나 보증한 앱이 아니며, 원본 NOTICE 조건에 따라 이름과 아이콘을 바꿨습니다. 원본 대비 바뀐 점은 [CHANGELOG](CHANGELOG.md)의 "작업본" 항목에 있습니다.
+> **원본과의 관계:** 이 앱은 [KoriyoSCAN](https://github.com/reform-dev-team/exam-rf-guard) 1.0.1(Apache-2.0)을 바탕으로 고친 별도 앱입니다. KoriyoSCAN 원작자나 화성시가 만들거나 보증한 앱이 아니며, 원본 NOTICE 조건에 따라 이름과 아이콘을 바꿨습니다. 원본 대비 바뀐 점은 [CHANGELOG](CHANGELOG.md)의 1.1.0-beta.1 항목에 있습니다.
 >
 > **원본 대비 추가된 것(모두 현장 검증 전):** ① 광학 키트(별도 장치)의 판정을 블루투스 광고로 받아 "광학 키트" 칸에 표시, ② 스마트 안경 회사의 블루투스 회사 코드·서비스 번호에 "스마트 안경 회사 기기 후보" 표시, ③ 원본 1.0.1의 테스트 결함 수정.
 

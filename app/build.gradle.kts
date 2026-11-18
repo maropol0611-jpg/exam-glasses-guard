@@ -12,8 +12,8 @@ android {
         applicationId = "io.github.maropol0611.proctorradar"
         minSdk = 29
         targetSdk = 35
-        versionCode = 14
-        versionName = "1.0.1"
+        versionCode = 15
+        versionName = "1.1.0-beta.1"
     }
 
     // 정식 서명: 키 파일과 비밀번호는 저장소에 두지 않고 환경 변수로 받는다.
